@@ -9,6 +9,9 @@ function AddTodo() {
     description: "",
   });
 
+  // TODO:
+  // Handle submission of the form to Cloud Firestore and redirect the user to
+  // the homepage.
   async function handleSubmit(e) {
     e.preventDefault();
     await addDoc(collection(db, "todos"), {

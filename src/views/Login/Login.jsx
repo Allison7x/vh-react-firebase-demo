@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   auth,
@@ -8,18 +8,30 @@ import {
 import "./Login.css";
 
 function Login() {
-  const [isLogin, setIsLogin] = useState(true);
   const [userInput, setUserInput] = useState({
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const navigate = useNavigate();
 
   function handleChange(e) {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
   }
 
+  const navigate = useNavigate();
+
+  // TODO:
+  // This component consolidates logging in and creating an account into one
+  // component. It should use a state variable to render the two different
+  // forms.
+  const [isLogin, setIsLogin] = useState(true);
+
+  // TODO:
+  // Handle submission of the form. If a user is logging in, then this function
+  // should call the `signInWithEmailAndPassword` function to log the user in.
+  // Otherwise, it should call the `createUserWithEmailAndPassword` function to
+  // create an account for the user. Regardless of which function was called,
+  // redirect the user to the home page afterwards.
   function handleSubmit(e) {
     e.preventDefault();
     if (isLogin) {

@@ -8,8 +8,16 @@ import "./App.css";
 import { auth, onAuthStateChanged } from "./lib/firebase";
 
 function App() {
+  // TODO:
+  // Depending on whether the user is logged in or not, we want to render
+  // different elements to the page. Use a state variable to keep track of
+  // this.
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  // TODO:
+  // Upon page load, check whether the user is logged in or not using the
+  // `onAuthStateChanged` function provided by Firebase. Update the login
+  // state above depending on whether they are logged in or not.
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
