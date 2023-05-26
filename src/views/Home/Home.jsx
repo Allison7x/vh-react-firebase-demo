@@ -1,38 +1,53 @@
 import { useState, useEffect } from "react";
-import reactLogo from "../..//assets/react.svg";
-import viteLogo from "/vite.svg";
+import * as firebaseLib from "../..//lib/firebase";
+import TodoList from "../..//components/TodoList/TodoList";
+import "./Home.css";
 
 function Home() {
-  const [count, setCount] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [todos, setTodos] = useState([]);
+
+  async function handleAdd() { }
+
+  async function getData() {
+    const query = await firebaseLib.getDocs(
+      firebaseLib.collection(firebaseLib.db, "todos")
+    );
+    const todos = [];
+    query.forEach((doc) => {
+      todos.push({
+        id: doc.id,
+        ...doc.data(),
+      });
+    });
+    setTodos(todos);
+  }
 
   useEffect(() => {
     // Request data from Cloud Firestore only if user is authenticated
+    firebaseLib.onAuthStateChanged(firebaseLib.auth, (user) => {
+      if (user) {
+        getData();
+        setIsLoggedIn(true);
+      }
+    });
   }, []);
 
   return (
     <>
       <h1>Todo List</h1>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {isLoggedIn ? (
+        <>
+          <button type="button" className="add-todo" onClick={handleAdd}>
+            <a href="/add-todo" style={{ color: "white" }}>
+              +
+            </a>
+          </button>
+          <TodoList todos={todos} />
+        </>
+      ) : (
+        <p>You must be logged in to view your todos!</p>
+      )}
     </>
   );
 }

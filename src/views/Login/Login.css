@@ -16,20 +16,11 @@
   }
 }
 
-.login-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-  text-align: left;
+.login-form h1 {
+  font-size: 30px;
 }
 
-.login-form input {
-  font-size: 1em;
-  padding: 0.375em 0.75em;
-  border: 1px solid gray;
-  border-radius: 5px;
-}
-
-.form-group {
-  display: block;
-  margin-bottom: 2rem;
+.convert {
+  background: none;
+  padding: 0;
 }

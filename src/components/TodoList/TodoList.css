@@ -1,0 +1,10 @@
+.todo-container {
+  margin: 3rem 0;
+}
+
+.card {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+}
