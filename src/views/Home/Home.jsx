@@ -20,17 +20,6 @@ function Home() {
     // `getDocs` returns the collection that must be iterated over using the
     // `.forEach` method. Store each document in a separate list and update
     // the `todos` state so they can be rendered onto the page.
-    const query = await getDocs(
-      collection(db, `todos/${auth.currentUser.email}/todolist`)
-    );
-    const todos = [];
-    query.forEach((doc) => {
-      todos.push({
-        id: doc.id,
-        ...doc.data(),
-      });
-    });
-    setTodos(todos);
   }
 
   useEffect(() => {

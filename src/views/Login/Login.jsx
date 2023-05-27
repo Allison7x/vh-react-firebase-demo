@@ -24,7 +24,6 @@ function Login() {
   // This component consolidates logging in and creating an account into one
   // component. It should use a state variable to render the two different
   // forms.
-  const [isLogin, setIsLogin] = useState(true);
 
   // TODO:
   // Handle submission of the form. If a user is logging in, then this function
@@ -32,26 +31,7 @@ function Login() {
   // Otherwise, it should call the `createUserWithEmailAndPassword` function to
   // create an account for the user. Regardless of which function was called,
   // redirect the user to the home page afterwards.
-  function handleSubmit(e) {
-    e.preventDefault();
-    if (isLogin) {
-      signInWithEmailAndPassword(auth, userInput.email, userInput.password)
-        .then((userCredential) => {
-          navigate("/");
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    } else {
-      createUserWithEmailAndPassword(auth, userInput.email, userInput.password)
-        .then((userCredential) => {
-          console.log(userCredential);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-  }
+  function handleSubmit(e) { }
 
   return (
     <form className="login-form" method="post" onSubmit={handleSubmit}>

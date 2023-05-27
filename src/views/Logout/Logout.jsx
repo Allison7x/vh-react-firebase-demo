@@ -9,9 +9,6 @@ function Logout() {
     // When clicking the logout link at the top, the `signOut` function should
     // be called to sign the user out. The user should then be redirected to the
     // home page.
-    signOut(auth).then(() => {
-      navigate("/");
-    });
   });
   return <></>;
 }

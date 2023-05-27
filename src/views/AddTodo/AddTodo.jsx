@@ -26,14 +26,7 @@ function AddTodo() {
   // TODO:
   // Handle submission of the form to Cloud Firestore and redirect the user to
   // the homepage.
-  async function handleSubmit(e) {
-    e.preventDefault();
-    await addDoc(collection(db, `todos/${auth.currentUser.email}/todolist`), {
-      ...userInput,
-      added: new Date(),
-    });
-    navigate("/");
-  }
+  async function handleSubmit(e) { }
 
   function handleChange(e) {
     setUserInput({ ...userInput, [e.target.name]: e.target.value });
