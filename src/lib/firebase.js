@@ -13,7 +13,6 @@ import {
   doc,
   getDocs,
   addDoc,
-  Timestamp,
 } from "firebase/firestore";
 
 // TODO: Add SDKs for Firebase products that you want to use
@@ -45,7 +44,6 @@ export {
   doc,
   getDocs,
   addDoc,
-  Timestamp,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Navigate, Routes, Route } from "react-router-dom";
 import Login from "./views/Login/Login";
 import Home from "./views/Home/Home";
 import AddTodo from "./views/AddTodo/AddTodo";
@@ -43,7 +43,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/add-todo" element={<AddTodo />} />
+          <Route path="/add-todo" element={<AddTodo />}></Route>
         </Routes>
       </BrowserRouter>
     </>

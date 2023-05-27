@@ -1,12 +1,26 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { addDoc, collection, db } from "../../lib/firebase";
+import {
+  auth,
+  addDoc,
+  collection,
+  db,
+  onAuthStateChanged,
+} from "../../lib/firebase";
 
 function AddTodo() {
-  const navigate = useNavigate("/");
+  const navigate = useNavigate();
   const [userInput, setUserInput] = useState({
     title: "",
     description: "",
+  });
+
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        navigate("/");
+      }
+    });
   });
 
   // TODO:
@@ -14,7 +28,7 @@ function AddTodo() {
   // the homepage.
   async function handleSubmit(e) {
     e.preventDefault();
-    await addDoc(collection(db, "todos"), {
+    await addDoc(collection(db, `todos/${auth.currentUser.email}/todolist`), {
       ...userInput,
       added: new Date(),
     });

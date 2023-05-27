@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import * as firebaseLib from "../..//lib/firebase";
+import {
+  auth,
+  collection,
+  db,
+  getDocs,
+  onAuthStateChanged,
+} from "../../lib/firebase";
 import TodoList from "../..//components/TodoList/TodoList";
 import "./Home.css";
 
@@ -7,11 +13,15 @@ function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [todos, setTodos] = useState([]);
 
-  async function handleAdd() { }
-
   async function getData() {
-    const query = await firebaseLib.getDocs(
-      firebaseLib.collection(firebaseLib.db, "todos")
+    // TODO:
+    // Use the `getDocs` and `collection` functions to pull the todos
+    // collection associated with the current user from the database.
+    // `getDocs` returns the collection that must be iterated over using the
+    // `.forEach` method. Store each document in a separate list and update
+    // the `todos` state so they can be rendered onto the page.
+    const query = await getDocs(
+      collection(db, `todos/${auth.currentUser.email}/todolist`)
     );
     const todos = [];
     query.forEach((doc) => {
@@ -24,8 +34,7 @@ function Home() {
   }
 
   useEffect(() => {
-    // Request data from Cloud Firestore only if user is authenticated
-    firebaseLib.onAuthStateChanged(firebaseLib.auth, (user) => {
+    onAuthStateChanged(auth, (user) => {
       if (user) {
         getData();
         setIsLoggedIn(true);
